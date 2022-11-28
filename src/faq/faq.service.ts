@@ -31,7 +31,7 @@ export class FAQService {
       this.FAQModel.find().exec().then((result) => {
         const newResult = [];
         for (var i in result) {
-          newResult.push({data : result[i].data})
+          newResult.push({data : result[i].data});
         }
         resolve(newResult);
       });

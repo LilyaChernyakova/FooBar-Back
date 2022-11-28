@@ -7,6 +7,7 @@ import { ContactsModule } from './contacts/contacts.module';
 import { QuestionsModule } from "./questions/questions.module";
 import { FAQModule } from './faq/faq.module';
 import { CertificateModule } from './certificate/certificate.module';
+import { RationsModule } from './rations/rations.module';
 
 @Module({
   imports: [
@@ -14,7 +15,8 @@ import { CertificateModule } from './certificate/certificate.module';
     MongooseModule.forRoot("mongodb://localhost:27017/"),
     QuestionsModule,
     FAQModule,
-    CertificateModule],
+    CertificateModule,
+    RationsModule],
   controllers: [AppController],
   providers: [AppService],
 })
