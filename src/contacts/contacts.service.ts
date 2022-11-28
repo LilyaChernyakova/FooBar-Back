@@ -6,8 +6,17 @@ import { Model } from "mongoose";
 import { CreateContactsDto } from "./dto/create-contacts.dto";
 import { UpdateContactsDto } from "./dto/update-contacts.dto";
 
-export interface qwerty {
+export interface Address {
+  city: string;
+  street: string;
+  building: string;
+}
+
+export interface Contact {
   phone: string;
+  address: Address;
+  email: string[];
+  schedule: string;
 }
 
 
@@ -17,15 +26,15 @@ export class ContactsService {
 
   constructor(@InjectModel(Contacts.name) private contactsModel: Model<ContactsDocument>) {}
 
-  async getContacts(): Promise<qwerty> {
-    let resltPromise = new Promise<qwerty>((resolve, reject) => {
+  async getContacts(): Promise<Contact[]> {
+    let resultPromise = new Promise<Contact[]>((resolve, reject) => {
       this.contactsModel.find().exec().then((result) => {
-        const newResult = { ...result[0] }
+        const newResult = { ...result }
         resolve(newResult);
       });
     })
 
-  return resltPromise;
+  return resultPromise;
   }
 
   async getContactsByID(id: string): Promise<Contacts> {
