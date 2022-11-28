@@ -18,9 +18,6 @@ export class Address {
 @Schema()
 export class Contacts {
   @Prop()
-  id: number;
-
-  @Prop()
   phone: string;
 
   @Prop()

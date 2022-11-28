@@ -7,16 +7,16 @@ import { CreateContactsDto } from "./dto/create-contacts.dto";
 import { UpdateContactsDto } from "./dto/update-contacts.dto";
 
 export interface ReturnAddress {
-  city: string;
-  street: string;
-  building: string;
+  city: string,
+  street: string,
+  building: string
 }
 
 export interface ReturnContacts {
-  phone: string;
-  address: ReturnAddress;
-  email: string[];
-  schedule: string;
+  phone: string,
+  address: ReturnAddress,
+  email: string[],
+  schedule: string
 }
 
 
@@ -29,7 +29,24 @@ export class ContactsService {
   async getContacts(): Promise<ReturnContacts[]> {
     let resultPromise = new Promise<ReturnContacts[]>((resolve, reject) => {
       this.contactsModel.find().exec().then((result) => {
-        const newResult = { ...result }
+        const newResult = [];
+        for (const res of result) {
+          newResult.push({
+            phone: res.phone,
+            address: {
+              city: res.address.city,
+              street: res.address.street,
+              building: res.address.building
+            },
+            email: res.email,
+            schedule: res.schedule
+          });
+        }
+        /*const newResult = [{
+          phone: result[0].phone,
+          address: result[0].address,
+          email: result[0].email,
+          schedule: result[0].schedule }];*/
         resolve(newResult);
       });
     })
