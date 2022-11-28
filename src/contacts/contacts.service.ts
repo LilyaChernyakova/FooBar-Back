@@ -6,15 +6,15 @@ import { Model } from "mongoose";
 import { CreateContactsDto } from "./dto/create-contacts.dto";
 import { UpdateContactsDto } from "./dto/update-contacts.dto";
 
-export interface Address {
+export interface ReturnAddress {
   city: string;
   street: string;
   building: string;
 }
 
-export interface Contact {
+export interface ReturnContacts {
   phone: string;
-  address: Address;
+  address: ReturnAddress;
   email: string[];
   schedule: string;
 }
@@ -26,8 +26,8 @@ export class ContactsService {
 
   constructor(@InjectModel(Contacts.name) private contactsModel: Model<ContactsDocument>) {}
 
-  async getContacts(): Promise<Contact[]> {
-    let resultPromise = new Promise<Contact[]>((resolve, reject) => {
+  async getContacts(): Promise<ReturnContacts[]> {
+    let resultPromise = new Promise<ReturnContacts[]>((resolve, reject) => {
       this.contactsModel.find().exec().then((result) => {
         const newResult = { ...result }
         resolve(newResult);
@@ -46,6 +46,7 @@ export class ContactsService {
     return newContacts.save();
   }
 
+  // как без знания айди обновить контакт?
   async updateContacts(id: string, contactsDto: UpdateContactsDto): Promise<Contacts> {
     return this.contactsModel.findByIdAndUpdate(id, contactsDto, {new: true});
   }
