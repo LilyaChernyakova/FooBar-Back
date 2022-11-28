@@ -6,14 +6,36 @@ import { Questions, QuestionsDocument } from "./schemas/questions.schema";
 import { CreateQuestionsDto } from "./dto/create-questions.dto";
 import { UpdateQuestionsDto } from "./dto/update-questions.dto";
 
+export interface ReturnQuestions {
+  id: string,
+  name: string,
+  email: string,
+  message: string
+}
+
 @Injectable()
 export class QuestionsService {
   private questions = [];
 
   constructor(@InjectModel(Questions.name) private questionsModel: Model<QuestionsDocument>) {}
 
-  async getQuestions(): Promise<Questions[]> {
-    return this.questionsModel.find().exec();
+  async getQuestions(): Promise<ReturnQuestions[]> {
+    let resultPromise = new Promise<ReturnQuestions[]>((resolve, reject) => {
+      this.questionsModel.find().exec().then((result) => {
+        const newResult = [];
+        for (const res of result) {
+          newResult.push({
+            id: res._id,
+            name: res.name,
+            email: res.email,
+            message: res.message
+          });
+        }
+        resolve(newResult);
+      });
+    });
+
+    return resultPromise;
   }
 
   async getQuestionsByID(id: string): Promise<Questions> {

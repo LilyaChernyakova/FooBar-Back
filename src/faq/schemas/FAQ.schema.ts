@@ -15,9 +15,6 @@ export class QA {
 @Schema()
 export class Parts {
   @Prop()
-  id: number;
-
-  @Prop()
   title: string;
 
   @Prop()
@@ -26,7 +23,6 @@ export class Parts {
 
 @Schema()
 export class FAQ {
-
   @Prop()
   data: Parts[];
 }

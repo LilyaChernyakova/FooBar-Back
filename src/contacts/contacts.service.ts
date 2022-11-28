@@ -42,11 +42,6 @@ export class ContactsService {
             schedule: res.schedule
           });
         }
-        /*const newResult = [{
-          phone: result[0].phone,
-          address: result[0].address,
-          email: result[0].email,
-          schedule: result[0].schedule }];*/
         resolve(newResult);
       });
     })

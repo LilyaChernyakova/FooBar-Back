@@ -1,10 +1,16 @@
 /*eslint-disable*/
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from "@nestjs/mongoose";
+import { InjectModel, Prop } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { Certificate, CertificateDocument } from "./schemas/certificate.schema";
 import { CreateCertificateDto } from "./dto/create-certificate.dto";
 import { UpdateCertificateDto } from "./dto/update-certificate.dto";
+
+export interface ReturnCertificate {
+  id: string,
+  name: string,
+  phone: string
+}
 
 @Injectable()
 export class CertificateService {
@@ -12,8 +18,22 @@ export class CertificateService {
 
   constructor(@InjectModel(Certificate.name) private certificateModel: Model<CertificateDocument>) {}
 
-  async getCertificate(): Promise<Certificate[]> {
-    return this.certificateModel.find().exec();
+  async getCertificate(): Promise<ReturnCertificate[]> {
+    let resultPromise = new Promise<ReturnCertificate[]>((resolve, reject) => {
+      this.certificateModel.find().exec().then((result) => {
+        const newResult = [];
+        for (const res of result) {
+          newResult.push({
+            id: res._id,
+            name: res.name,
+            phone: res.phone
+          });
+        }
+        resolve(newResult);
+      });
+    });
+
+    return resultPromise;
   }
 
   async getCertificateByID(id: string): Promise<Certificate> {
