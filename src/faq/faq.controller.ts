@@ -3,7 +3,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common"
 import { FAQ } from "./schemas/FAQ.schema";
 import { CreateFAQDto } from "./dto/create-FAQ.dto";
 import { UpdateFAQDto } from "./dto/update-FAQ.dto";
-import { FAQService } from "./faq.service";
+import {FAQService, ReturnFAQ} from "./faq.service";
 
 @Controller('faq')
 export class FAQController {
@@ -11,7 +11,7 @@ export class FAQController {
   constructor(private readonly faqService: FAQService) {}
 
   @Get()
-  getAllFAQ(): Promise<FAQ[]> {
+  getAllFAQ(): Promise<ReturnFAQ[]> {
     return this.faqService.getFAQ();
   }
 
