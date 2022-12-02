@@ -1,20 +1,22 @@
 /*eslint-disable*/
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import {ApiProperty} from "@nestjs/swagger";
 
 export type RationsDocument = Rations & Document;
 
 @Schema()
+// !!! Добавить ApiProperty вместо Prop
 export class Rations{
-    @Prop()
+    @ApiProperty()
     title: string;
 
-    @Prop()
+    @ApiProperty()
     description: string;
 
-    @Prop()
+    @ApiProperty()
     calories: number
 
-    @Prop()
+    @ApiProperty()
     price: number;
 }
 

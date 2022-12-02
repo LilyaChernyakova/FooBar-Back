@@ -14,7 +14,7 @@ export interface ReturnRations {
     price: number
 }
 
-
+// !!! отредактировать delete
 @Injectable()
 export class RationsService {
     private rations = [];
@@ -58,7 +58,7 @@ export class RationsService {
         return this.rationsModel.findByIdAndRemove(id);
     }
 
-    async removeAllRations(): Promise<Rations> {
+    async removeAllRations() {
         return this.rationsModel.remove().exec();
     }
 }
