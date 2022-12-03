@@ -7,16 +7,20 @@ export type RationsDocument = Rations & Document;
 @Schema()
 // !!! Добавить ApiProperty вместо Prop
 export class Rations{
-    @ApiProperty()
+    @Prop()
+    @ApiProperty({example: 'Название блюда'})
     title: string;
 
-    @ApiProperty()
+    @Prop()
+    @ApiProperty({example: 'Пример описания блюда'})
     description: string;
 
-    @ApiProperty()
+    @Prop()
+    @ApiProperty({example: 1337})
     calories: number
 
-    @ApiProperty()
+    @Prop()
+    @ApiProperty({example: 1337})
     price: number;
 }
 

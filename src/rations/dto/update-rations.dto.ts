@@ -3,12 +3,12 @@ import {ApiProperty} from "@nestjs/swagger";
 
 // !!! Добавить ApiProperty
 export class UpdateRationsDto {
-    @ApiProperty()
+    @ApiProperty({example: 'Название блюда'})
     readonly title;
-    @ApiProperty()
+    @ApiProperty({example: 'Пример описания блюда'})
     readonly description;
-    @ApiProperty()
+    @ApiProperty({example: 1337})
     readonly calories;
-    @ApiProperty({description: "cost for 1 day"})
+    @ApiProperty({example: 1337, description: 'cost for 1 day'})
     readonly price;
 }
