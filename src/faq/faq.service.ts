@@ -39,8 +39,14 @@ export class FAQService {
     return resultPromise;
   }
 
-  async getFAQByID(id: string): Promise<FAQ> {
-    return this.FAQModel.findById(id);
+  async getFAQByID(id: string): Promise<ReturnFAQ> {
+    let resultPromise = new Promise<ReturnFAQ>((resolve, reject) => {
+      this.FAQModel.findById(id).then((result) => {
+        const newResult = { data : result.data };
+        resolve(newResult);
+      });
+    })
+    return resultPromise;
   }
 
   async createFAQ(faqDto: CreateFAQDto) {

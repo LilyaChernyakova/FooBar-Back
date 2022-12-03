@@ -27,7 +27,7 @@ export class RationsService {
                 const newResult = [];
                 for (const res of result) {
                     newResult.push({
-                        id: res._id,
+                        id: res.id,
                         title: res.title,
                         description: res.description,
                         calories: res.calories,
@@ -41,8 +41,21 @@ export class RationsService {
         return resultPromise;
     }
 
-    async getRationsByID(id: string): Promise<Rations> {
-        return this.rationsModel.findById(id);
+    async getRationsByID(id: string): Promise<ReturnRations> {
+        let resultPromise = new Promise<ReturnRations>((resolve, reject) => {
+            this.rationsModel.findById(id).then((result) => {
+                const newResult = {
+                    id: result.id,
+                    title: result.title,
+                    description: result.description,
+                    calories: result.calories,
+                    price: result.price
+                }
+                resolve(newResult);
+            });
+        });
+
+        return resultPromise;
     }
 
     async createRations(rationsDto: CreateRationsDto) {

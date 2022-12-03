@@ -24,7 +24,7 @@ export class CertificateService {
         const newResult = [];
         for (const res of result) {
           newResult.push({
-            id: res._id,
+            id: res.id,
             name: res.name,
             phone: res.phone
           });
@@ -36,8 +36,19 @@ export class CertificateService {
     return resultPromise;
   }
 
-  async getCertificateByID(id: string): Promise<Certificate> {
-    return this.certificateModel.findById(id);
+  async getCertificateByID(id: string): Promise<ReturnCertificate> {
+    let resultPromise = new Promise<ReturnCertificate>((resolve, reject) => {
+      this.certificateModel.findById(id).then((result) => {
+        const newResult = {
+          id: result.id,
+          name: result.name,
+          phone: result.phone
+        }
+        resolve(newResult);
+      });
+    });
+
+    return resultPromise;
   }
 
   async createCertificate(certificateDto: CreateCertificateDto) {

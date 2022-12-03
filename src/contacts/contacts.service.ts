@@ -49,8 +49,24 @@ export class ContactsService {
   return resultPromise;
   }
 
-  async getContactsByID(id: string): Promise<Contacts> {
-    return this.contactsModel.findById(id);
+  async getContactsByID(id: string): Promise<ReturnContacts> {
+    let resultPromise = new Promise<ReturnContacts>((resolve, reject) => {
+      this.contactsModel.findById(id).then((result) => {
+        const newResult = {
+          phone: result.phone,
+          address: {
+            city: result.address.city,
+            street: result.address.street,
+            building: result.address.building
+          },
+          email: result.email,
+          schedule: result.schedule
+        }
+        resolve(newResult);
+      });
+    })
+
+    return resultPromise;
   }
 
   async createContacts(contactsDto: CreateContactsDto) {

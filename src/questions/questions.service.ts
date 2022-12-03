@@ -25,7 +25,7 @@ export class QuestionsService {
         const newResult = [];
         for (const res of result) {
           newResult.push({
-            id: res._id,
+            id: res.id,
             name: res.name,
             email: res.email,
             message: res.message
@@ -38,8 +38,20 @@ export class QuestionsService {
     return resultPromise;
   }
 
-  async getQuestionsByID(id: string): Promise<Questions> {
-    return this.questionsModel.findById(id);
+  async getQuestionsByID(id: string): Promise<ReturnQuestions> {
+    let resultPromise = new Promise<ReturnQuestions>((resolve, reject) => {
+      this.questionsModel.findById(id).then((result) => {
+        const newResult = {
+          id: result.id,
+          name: result.name,
+          email: result.email,
+          message: result.message
+        };
+        resolve(newResult);
+      });
+    });
+
+    return resultPromise;
   }
 
   async createQuestions(questionsDto: CreateQuestionsDto) {
