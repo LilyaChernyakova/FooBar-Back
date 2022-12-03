@@ -4,7 +4,7 @@ import {RationsService} from "./rations.service";
 import {Rations} from "./schemas/rations.schema";
 import {CreateRationsDto} from "./dto/create-rations.dto";
 import {UpdateRationsDto} from "./dto/update-rations.dto";
-import {ApiBody, ApiHeader, ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
+import {ApiBody, ApiOperation, ApiResponse, ApiTags} from "@nestjs/swagger";
 
 // !!! добавление ApiTags
 // !!! добавление ApiBoby

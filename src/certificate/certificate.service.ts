@@ -1,6 +1,6 @@
 /*eslint-disable*/
 import { Injectable } from '@nestjs/common';
-import { InjectModel, Prop } from "@nestjs/mongoose";
+import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { Certificate, CertificateDocument } from "./schemas/certificate.schema";
 import { CreateCertificateDto } from "./dto/create-certificate.dto";
