@@ -1,6 +1,13 @@
 /*eslint-disable*/
+import {ApiProperty} from "@nestjs/swagger";
+
 export class UpdateQuestionsDto {
-  readonly username: string;
+  @ApiProperty({example: 'Lilya'})
+  readonly name: string;
+
+  @ApiProperty({example : 'lilechka@mail.ru'})
   readonly email: string;
-  readonly mes: string;
+
+  @ApiProperty({example: 'WHERE IS MY MONEY?'})
+  readonly message: string;
 }

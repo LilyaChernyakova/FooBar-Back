@@ -11,7 +11,7 @@ export class Certificate {
   name: string;
 
   @Prop()
-  @ApiProperty({example: '888005553535'})
+  @ApiProperty({example: '88005553535'})
   phone: string;
 }
 
